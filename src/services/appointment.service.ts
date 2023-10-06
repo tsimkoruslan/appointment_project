@@ -1,24 +1,29 @@
-import { IAppointmetObj } from "../types/body.types";
+import { appointmentRepository } from "../repository/appointment.repository";
+import { IAppointmet, IDoctor, IPatient } from "../types/body.types";
 
 class AppointmentService {
-  public async appointment(body: IAppointmetObj) {
-    const { appointmet, doctor, patient } = body;
+  public async createDoctor(dto: IDoctor): Promise<IDoctor> {
+    return await appointmentRepository.createDoctor(dto);
+  }
 
-    const patientTimeParts = patient.time.split("-");
-    const doctorTimeParts = doctor.time.split("-");
-    const appointmetTimeParts = patient.time.split("-");
+  public async createPatient(dto: IPatient): Promise<IPatient> {
+    return await appointmentRepository.createPatient(dto);
+  }
 
-    if (
-      patientTimeParts[0] <= appointmetTimeParts[1] &&
-      patientTimeParts[1] >= appointmetTimeParts[0] &&
-      doctorTimeParts[0] <= appointmetTimeParts[1] &&
-      doctorTimeParts[1] >= appointmetTimeParts[0]
-    ) {
-      console.log("Зустріч можлива");
-    } else {
-      console.log("Зустріч не можлива");
-    }
+  public async createAppointment(dto: IAppointmet): Promise<IAppointmet> {
+    return await appointmentRepository.createAppointment(dto);
+  }
+
+  public async getPatients(): Promise<IPatient[]> {
+    return await appointmentRepository.getPatients();
+  }
+
+  public async getDoctors(): Promise<IDoctor[]> {
+    return await appointmentRepository.getDoctors();
+  }
+
+  public async getAppointments(): Promise<IAppointmet[]> {
+    return await appointmentRepository.getAppointments();
   }
 }
-
 export const appointmentService = new AppointmentService();

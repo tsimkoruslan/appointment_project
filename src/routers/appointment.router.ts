@@ -6,10 +6,25 @@ import { bodyValidator } from "../validators/body.validator";
 
 const router = Router();
 
+router.get("/patients", appointmentController.getPatients);
 router.post(
-  "/",
-  commonMiddleware.isBodyValid(bodyValidator.appointmentObject),
-  appointmentController.appointment,
+  "/patient",
+  commonMiddleware.isBodyValid(bodyValidator.patient),
+  appointmentController.createPatient,
+);
+
+router.get("/doctors", appointmentController.getDoctors);
+router.post(
+  "/doctor",
+  commonMiddleware.isBodyValid(bodyValidator.doctor),
+  appointmentController.createDoctor,
+);
+
+router.get("/appointments", appointmentController.getAppointments);
+router.post(
+  "/appointment",
+  commonMiddleware.isBodyValid(bodyValidator.appointment),
+  appointmentController.createAppointment,
 );
 
 export const appointmentRouter = router;

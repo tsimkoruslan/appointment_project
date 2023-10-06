@@ -9,8 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post("/", appointmentRouter);
-
+app.use("/", appointmentRouter);
 app.use((error: ApiError, req: Request, res: Response, next: NextFunction) => {
   const status = error.status || 500;
 
