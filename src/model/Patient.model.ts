@@ -6,6 +6,7 @@ const patientShema = new Schema(
   {
     name: {
       type: String,
+
       required: true,
     },
     time: {

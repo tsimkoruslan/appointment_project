@@ -13,5 +13,5 @@ export interface IDoctor extends Document {
 export interface IAppointmet extends Document {
   nameDoctor: string;
   namePatient: string;
-  time: string;
+  time?: string;
 }
